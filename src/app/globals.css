@@ -9,3 +9,19 @@
   outline: none;
   font-family: Verdana, Geneva, sans-serif;
 }
+
+.animation-spin{
+  animation-name: animation-spin;
+  animation-duration: 0.8s;
+  animation-timing-function: steps(12, end);
+  animation-iteration-count: infinite;
+}
+
+@keyframes animation-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
