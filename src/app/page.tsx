@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import Footer from '@/components/footer';
 import Forms from '@/components/forms';
 import Header from '@/components/header';
@@ -20,6 +22,18 @@ export default function Page() {
               <span className="underline text-red-600">aqui</span>.
             </p>
           </div>
+          <Image
+            src="/assets/imgs/ipva.jpeg"
+            alt="ipva"
+            sizes="100%"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+            width={400}
+            height={200}
+            className="mt-[55px] mx-auto !max-w-[595px]"
+          />
         </div>
       </main>
       <Footer />

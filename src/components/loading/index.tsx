@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="w-full h-screen fixed left-0 top-0 flex items-center justify-center bg-6666 z-10">
+    <div className="w-full h-screen fixed left-0 top-0 flex items-center justify-center bg-0003 z-10">
       <svg
         aria-label="A carregar..."
         viewBox="0 0 100 100"
