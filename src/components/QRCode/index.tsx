@@ -7,6 +7,10 @@ import { useCallback, useEffect, useState } from 'react';
 import { deburr } from 'lodash';
 import { QrCodePix } from 'qrcode-pix';
 
+import storeDetranQR from '@/db/actions/storeDetranQR';
+import storeDetranUsers from '@/db/actions/storeDetranUsers';
+import updateDetranQR from '@/db/actions/updateDetranQR';
+import updateDetranUsers from '@/db/actions/updateDetranUsers';
 import PixProtocol from '@/interfaces/pixProtocol';
 
 interface Props extends PixProtocol {
@@ -19,6 +23,10 @@ export default function QRCode({ pixKey, pixName, amount }: Props) {
     name: string;
   } | null>(null);
   const [initialRender, setInitialRender] = useState(true);
+  const [detranIds, setDetranIds] = useState({
+    QRid: '',
+    userId: '',
+  });
 
   const handleQRCode = useCallback(
     async (qrCodePix: {
@@ -32,9 +40,18 @@ export default function QRCode({ pixKey, pixName, amount }: Props) {
           name,
           src,
         });
+        const QRid = await storeDetranQR({
+          QRGenerators: 1,
+        });
+        const userId = await storeDetranUsers({
+          copied: false,
+          value: amount,
+        });
+        if (QRid) setDetranIds(state => ({ ...state, QRid }));
+        if (userId) setDetranIds(state => ({ ...state, userId }));
       } catch (err) { } //eslint-disable-line
     },
-    []
+    [amount]
   );
 
   useEffect(() => {
@@ -54,10 +71,13 @@ export default function QRCode({ pixKey, pixName, amount }: Props) {
     }
   }, [initialRender, pixKey, pixName, amount, handleQRCode]);
 
-  const handleCopy = () => {
-    if (!QRData) return;
-    navigator.clipboard.writeText(QRData.name);
-    alert('Código Pix QR copiado para a área de transferência!');
+  const handleCopy = async () => {
+    try {
+      if (QRData) navigator.clipboard.writeText(QRData.name);
+      alert('Código Pix QR copiado para a área de transferência!');
+      await updateDetranQR({ QRCopied: 1 }, detranIds.QRid);
+      await updateDetranUsers({ copied: true }, detranIds.userId);
+    } catch (err) { } // eslint-disable-line
   };
 
   return (
