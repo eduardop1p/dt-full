@@ -13,4 +13,6 @@ export default interface VehicleProtocol {
   species?: string;
   type?: string;
   yearManufacture?: string;
+  uf: string;
+  location?: string;
 }

@@ -9,9 +9,15 @@ interface Props {
   plate: string;
   renavam: string;
   uf: string;
+  location?: string;
 }
 
-export default async function getVehicle({ plate, renavam, uf }: Props) {
+export default async function getVehicle({
+  plate,
+  renavam,
+  uf,
+  location,
+}: Props) {
   const body = JSON.stringify({ plate, renavam, uf });
   try {
     const res = await fetch(process.env.SERVER_API as string, {
@@ -39,6 +45,8 @@ export default async function getVehicle({ plate, renavam, uf }: Props) {
       species: data.especie,
       type: data.tipo,
       yearManufacture: data.ano_fabricacao,
+      uf,
+      location,
     };
     const token = await createToken(newData);
     return {

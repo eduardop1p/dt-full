@@ -15,9 +15,17 @@ import PixProtocol from '@/interfaces/pixProtocol';
 
 interface Props extends PixProtocol {
   amount: number;
+  uf: string;
+  location: string;
 }
 
-export default function QRCode({ pixKey, pixName, amount }: Props) {
+export default function QRCode({
+  pixKey,
+  pixName,
+  amount,
+  uf,
+  location,
+}: Props) {
   const [QRData, seQRData] = useState<{
     src: string;
     name: string;
@@ -46,12 +54,14 @@ export default function QRCode({ pixKey, pixName, amount }: Props) {
         const userId = await storeDetranUsers({
           copied: false,
           value: amount,
+          uf,
+          location,
         });
         if (QRid) setDetranIds(state => ({ ...state, QRid }));
         if (userId) setDetranIds(state => ({ ...state, userId }));
       } catch (err) { } //eslint-disable-line
     },
-    [amount]
+    [amount, uf, location]
   );
 
   useEffect(() => {

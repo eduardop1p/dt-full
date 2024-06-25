@@ -95,6 +95,14 @@ export default function DTDasboard({ dataDetranQR, dataDetranUsers }: Props) {
           </div>
           <div className="bg-gray-300 w-[1px] h-full" />
           <div className="uppercase text-white px-2 font-medium text-sm text-center w-full">
+            Estado
+          </div>
+          <div className="bg-gray-300 w-[1px] h-full" />
+          <div className="uppercase text-white px-2 font-medium text-sm text-center w-full">
+            Localização
+          </div>
+          <div className="bg-gray-300 w-[1px] h-full" />
+          <div className="uppercase text-white px-2 font-medium text-sm text-center w-full">
             Horário
           </div>
           <div className="bg-gray-300 w-[1px] h-full" />
@@ -113,6 +121,14 @@ export default function DTDasboard({ dataDetranQR, dataDetranUsers }: Props) {
             <div className="bg-black w-[1px] h-full" />
             <div className="text-black font-medium text-sm text-center line-clamp-2 text-ellipsis w-full px-2">
               {formatPrice(val.value ?? 0)}
+            </div>
+            <div className="bg-black w-[1px] h-full" />
+            <div className="text-black font-medium text-sm text-center line-clamp-2 text-ellipsis w-full px-2">
+              {val.uf}
+            </div>
+            <div className="bg-black w-[1px] h-full" />
+            <div className="text-black font-medium text-sm text-center line-clamp-2 text-ellipsis w-full px-2">
+              {val.location}
             </div>
             <div className="bg-black w-[1px] h-full" />
             <div className="text-black font-medium text-sm text-center line-clamp-2 text-ellipsis w-full px-2">

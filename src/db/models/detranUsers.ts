@@ -9,6 +9,8 @@ export interface DetranUsersDocumentProtocol
 const detranUsersSchema = new Schema<DetranUsersDocumentProtocol>({
   value: { type: Number, required: false },
   copied: { type: Boolean, required: false },
+  uf: { type: String, required: false },
+  location: { type: String, required: false },
   createdIn: { type: Date, required: false, default: Date.now },
 });
 

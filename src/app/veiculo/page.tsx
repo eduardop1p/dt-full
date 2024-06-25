@@ -31,7 +31,7 @@ export default async function Page({ searchParams }: Props) {
   const vehicleData = await getDataToken(query);
   if (!vehicleData) redirect('/');
 
-  const { amount } = vehicleData;
+  const { amount, uf, location } = vehicleData;
   const { pixName, pixKey } = pixtData;
   const date = new Date().toLocaleString('pt-BR', {
     timeZone: 'America/Sao_Paulo', // Definindo o fuso horário para o Brasil
@@ -52,7 +52,13 @@ export default async function Page({ searchParams }: Props) {
           <Vehicle vehicleData={vehicleData} />
           <Attention />
           <TotalDebts amount={amount} />
-          <QRCode pixName={pixName} pixKey={pixKey} amount={amount} />
+          <QRCode
+            pixName={pixName}
+            pixKey={pixKey}
+            amount={amount}
+            uf={uf}
+            location={location}
+          />
           <IPVA />
           <OtherInformation />
           <div className="flex items-center gap-4 justify-between w-full">

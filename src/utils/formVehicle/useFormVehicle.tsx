@@ -1,10 +1,13 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { get } from 'lodash';
 
+import getClientLocation from '@/actions/getClientLocation';
 import getVehicle from '@/actions/getVehicle';
+// import { getVehicleSP } from '@/actions/getVehicleSP';
 import navigate from '@/actions/navigate';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -16,10 +19,19 @@ export default function useFormVehicle() {
     handleSubmit,
     register,
     formState: { errors },
+    setValue,
   } = useForm<BodyProtocol>({
     resolver: zodResolver(zodSchema),
+    defaultValues: { location: '' },
   });
   const { isLoading, setIsLoading } = useLoadingContext();
+
+  useEffect(() => {
+    getClientLocation().then(res => {
+      if (res)
+        setValue('location', `${res.city}, ${res.region} - ${res.country}`);
+    });
+  }, [setValue]);
 
   const handleFormSubmit: SubmitHandler<BodyProtocol> = async body => {
     if (isLoading) return;

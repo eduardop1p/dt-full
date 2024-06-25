@@ -10,9 +10,11 @@
 // interface Props {
 //   plate: string;
 //   renavam: string;
+//   uf: string;
+//   location?: string;
 // }
 
-// export async function getVehicleSP({ plate, renavam }: Props) {
+// export async function getVehicleSP({ plate, renavam, uf, location }: Props) {
 //   try {
 //     const res = await fetch(
 //       `https://api.gw.cellereit.com.br/consultas/sefaz/sp/debitos-veiculo?placa=${plate}&renavam=${renavam}`,
@@ -50,6 +52,8 @@
 //       species: data.especie,
 //       type: data.tipo,
 //       yearManufacture: data.ano_fabricacao,
+//       uf,
+//       location,
 //     };
 //     if (!newData.amount) throw new VehicleError('IPVA do veículo já está pago');
 //     const token = await createToken(newData);
