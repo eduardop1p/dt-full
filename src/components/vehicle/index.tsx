@@ -33,12 +33,12 @@ export default function Vehicle({ vehicleData }: Props) {
               Renavam: <span className="font-normal">{renavam}</span>
             </p>
             <p className="text-333333 font-bold text-[10px]">
-              Espécie: <span className="font-normal">{species}</span>
+              Placa: <span className="font-normal">{plate}</span>
             </p>
           </div>
           <div className="flex w-full justify-between items-center gap-8">
             <p className="text-333333 font-bold text-[10px]">
-              Placa: <span className="font-normal">{plate}</span>
+              Município: <span className="font-normal">{city}</span>
             </p>
             <p className="text-333333 font-bold text-[10px]">
               Categoria: <span className="font-normal">{category}</span>
@@ -71,7 +71,7 @@ export default function Vehicle({ vehicleData }: Props) {
           </div>
           <div className="flex w-full justify-between items-center gap-8">
             <p className="text-333333 font-bold text-[10px]">
-              Município: <span className="font-normal">{city}</span>
+              Espécie: <span className="font-normal">{species}</span>
             </p>
             <p className="text-333333 font-bold text-[10px]">
               Último Licenciamento:{' '}

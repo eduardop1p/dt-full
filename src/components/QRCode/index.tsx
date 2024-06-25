@@ -16,7 +16,7 @@ import PixProtocol from '@/interfaces/pixProtocol';
 interface Props extends PixProtocol {
   amount: number;
   uf: string;
-  location: string;
+  location?: string;
 }
 
 export default function QRCode({

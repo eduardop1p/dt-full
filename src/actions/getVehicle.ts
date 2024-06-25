@@ -1,5 +1,7 @@
 'use server';
 
+import { get } from 'lodash';
+
 import VehicleError from '@/errors/vehicleError';
 import VehicleProtocol from '@/interfaces/vehicleProtocol';
 
@@ -24,31 +26,43 @@ export default async function getVehicle({
       method: 'POST',
       body,
       cache: 'no-cache',
+      headers: {
+        Authorization: process.env.API_KEY as string,
+      },
     });
     if (!res.ok)
       throw new VehicleError(
-        'Ocorreu um erro, revise os parâmetros renavam e placa'
+        'Ocorreu um erro, revise os parâmetros renavam e placa para tentar novalmente'
       );
-    let data = await res.json();
-    const newData: VehicleProtocol = {
-      amount: data.normalizado_valor_total_debitos,
-      plate: data.placa,
-      renavam: data.renavam,
-      brandModel: data.marca,
-      city: data.municipio,
-      category: data.categoria,
-      fuel: data.combustivel,
-      body: data.carroceria,
-      lastLicensing: data.ultimo_lancamento,
-      passengers: data.passageiros,
-      rangeIPVA: data.faixa_ipva,
-      species: data.especie,
-      type: data.tipo,
-      yearManufacture: data.ano_fabricacao,
+    let data: VehicleProtocol = await res.json();
+    if (get(data, 'error', false) && data.error) {
+      const { message } = data.error;
+      throw new VehicleError(message);
+    }
+    data = {
+      ...data,
+      get amount() {
+        const total = this.data.reduce((p, c) => p + c.value, 0);
+        return total;
+      },
+      plate,
+      renavam,
       uf,
       location,
+      status: 200,
+      brandModel: '***************',
+      category: '***************',
+      fuel: '***************',
+      body: '***************',
+      lastLicensing: '***************',
+      passengers: '***************',
+      rangeIPVA: '***************',
+      species: '***************',
+      type: '***************',
+      yearManufacture: '***************',
     };
-    const token = await createToken(newData);
+
+    const token = await createToken(data);
     return {
       token,
       status: 200,
