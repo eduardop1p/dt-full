@@ -1,5 +1,3 @@
-'use server';
-
 import clientLocationProtocol from '@/interfaces/clientLocationProtocol';
 
 export default async function getClientLocation() {
@@ -15,7 +13,7 @@ export default async function getClientLocation() {
     const data: clientLocationProtocol = await res.json();
     return data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return null;
   }
 }

@@ -5,9 +5,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { get } from 'lodash';
 
-import getClientLocation from '@/actions/getClientLocation';
 import getVehicle from '@/actions/getVehicle';
 import navigate from '@/actions/navigate';
+import getClientLocation from '@/functions/getClientLocation';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useLoadingContext } from '../loadingContext/useContext';
@@ -21,7 +21,7 @@ export default function useFormVehicle() {
     setValue,
   } = useForm<BodyProtocol>({
     resolver: zodResolver(zodSchema),
-    defaultValues: { location: '' },
+    defaultValues: { location: 'Indisponivel' },
   });
   const { isLoading, setIsLoading } = useLoadingContext();
 
