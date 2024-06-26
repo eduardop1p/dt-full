@@ -43,7 +43,6 @@ export default function useFormVehicle() {
     }
     const token = res.token as string;
     await navigate(`/veiculo?query=${token}`);
-    setIsLoading(false);
   };
 
   return { handleSubmit: handleSubmit(handleFormSubmit), register, errors };
