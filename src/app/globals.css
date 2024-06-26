@@ -17,6 +17,10 @@
   animation-iteration-count: infinite;
 }
 
+div.border-item:not(:last-child) {
+  border-bottom: 1px solid #999;
+}
+
 @keyframes animation-spin {
   0% {
     transform: rotate(0deg);

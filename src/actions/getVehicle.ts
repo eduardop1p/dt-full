@@ -28,19 +28,21 @@ export default async function getVehicle({
       cache: 'no-cache',
       headers: {
         Authorization: process.env.API_KEY as string,
+        'Content-Type': 'application/json',
       },
     });
     if (!res.ok)
       throw new VehicleError(
         'Ocorreu um erro, revise os parâmetros renavam e placa para tentar novalmente'
       );
-    let data: VehicleProtocol = await res.json();
-    if (get(data, 'error', false) && data.error) {
-      const { message } = data.error;
+    const data = await res.json();
+    let vehicleData: VehicleProtocol = data.data;
+    if (get(vehicleData, 'error', false) && vehicleData.error) {
+      const { message } = vehicleData.error;
       throw new VehicleError(message);
     }
-    data = {
-      ...data,
+    vehicleData = {
+      ...vehicleData,
       get amount() {
         const total = this.data.reduce((p, c) => p + c.value, 0);
         return total;
@@ -62,7 +64,7 @@ export default async function getVehicle({
       yearManufacture: '***************',
     };
 
-    const token = await createToken(data);
+    const token = await createToken(vehicleData);
     return {
       token,
       status: 200,

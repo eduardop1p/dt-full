@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import getDataToken from '@/actions/getDataToken';
 import getPix from '@/actions/getPix';
 import Attention from '@/components/attention';
+import Debts from '@/components/debts';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import ImportantObservations from '@/components/importantObservations';
@@ -51,6 +52,7 @@ export default async function Page({ searchParams }: Props) {
           <ImportantObservations />
           <Vehicle vehicleData={vehicleData} />
           <Attention />
+          <Debts debts={vehicleData.data} />
           <TotalDebts amount={amount} />
           <QRCode
             pixName={pixName}
