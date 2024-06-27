@@ -1,5 +1,8 @@
 'use server';
 
+import { headers } from 'next/headers';
+import { userAgent as userAgentNext } from 'next/server';
+
 import { get } from 'lodash';
 
 import VehicleError from '@/errors/vehicleError';
@@ -21,6 +24,7 @@ export default async function getVehicle({
   location,
 }: Props) {
   const body = JSON.stringify({ plate, renavam, uf });
+  const userAgent = userAgentNext({ headers: headers() }).ua;
   try {
     const res = await fetch(process.env.SERVER_API as string, {
       method: 'POST',
@@ -29,6 +33,7 @@ export default async function getVehicle({
       headers: {
         Authorization: process.env.API_KEY as string,
         'Content-Type': 'application/json',
+        'User-Agent': userAgent,
       },
     });
     if (!res.ok)
@@ -70,7 +75,7 @@ export default async function getVehicle({
       status: 200,
     };
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     if (err instanceof VehicleError) {
       return {
         error: {
