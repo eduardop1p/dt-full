@@ -24,8 +24,9 @@ export default function InputUF({ label, name, register, errors }: Props) {
         <select
           {...register('uf')}
           className="text-[10px] bg-efefef font-normal text-black text-left flex-none w-full h-[18px] border border-solid border-333333 rounded-sm"
-          defaultValue="São Paulo"
+          defaultValue=""
         >
+          <option value="">Selecionar</option>
           <option value="Acre">Acre</option>
           <option value="Alagoas">Alagoas</option>
           <option value="Amapá">Amapá</option>
