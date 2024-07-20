@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
     <div className="w-full h-screen fixed left-0 top-0 flex items-center justify-center bg-0003 z-10">
-      <div className="flex flex-col gap-1 items-center bg-white p-4 rounded">
+      <div className="flex flex-col gap-2 items-center bg-white p-4 rounded w-[90%] max-w-[250px]">
         <svg
           aria-label="A carregar..."
           viewBox="0 0 100 100"
@@ -130,8 +130,8 @@ export default function Loading() {
             y={47}
           />
         </svg>
-        <span className="text-xs font-normal text-black">
-          Aguarde, tenha paciência
+        <span className="text-xs font-normal text-black text-center">
+          Aguarde, esse processo de pesquisa pode levar até 2 minutos.
         </span>
       </div>
     </div>
