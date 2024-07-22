@@ -68,7 +68,7 @@ export default async function Page({ searchParams }: Props) {
               href="/"
               className="bg-efefef text-xs cursor-pointer rounded-sm font-medium text-black border border-solid border-black px-5 h-[18px] hover:bg-e6e6e6"
             >
-              Voltar
+              Nova consulta
             </Link>
             <button
               type="button"
