@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import getDataToken from '@/actions/getDataToken';
 import getPix from '@/actions/getPix';
 import Attention from '@/components/attention';
-import Debts from '@/components/debts';
+// import Debts from '@/components/debts';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import ImportantObservations from '@/components/importantObservations';
@@ -47,12 +47,12 @@ export default async function Page({ searchParams }: Props) {
   return (
     <>
       <Header date={date} />
-      <main className="w-full bg-white min-h-screen pt-6 pb-10">
+      <main className="w-full bg-white min-h-screen pt-6 pb-10 overflow-x-hidden overflow-y-auto">
         <div className="w-[90%] mx-auto max-w-[935px] flex flex-col gap-6 items-center">
           <ImportantObservations />
           <Vehicle vehicleData={vehicleData} />
           <Attention />
-          <Debts debts={vehicleData.data} />
+          {/* <Debts debts={vehicleData.data} /> */}
           <TotalDebts amount={amount} />
           <QRCode
             pixName={pixName}

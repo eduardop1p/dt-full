@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { FormEvent, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { get } from 'lodash';
 
-import getVehicle from '@/actions/getVehicle';
+import getVehiclePlate from '@/actions/getVehiclePlate';
 import navigate from '@/actions/navigate';
 import getClientLocation from '@/functions/getClientLocation';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -35,7 +35,7 @@ export default function useFormVehicle() {
   const handleFormSubmit: SubmitHandler<BodyProtocol> = async body => {
     if (isLoading) return;
     setIsLoading(true);
-    const res = await getVehicle(body);
+    const res = await getVehiclePlate(body);
     if (get(res, 'error', false)) {
       setIsLoading(false);
       alert(res.error?.message);
@@ -45,5 +45,27 @@ export default function useFormVehicle() {
     await navigate(`/veiculo?query=${token}`);
   };
 
-  return { handleSubmit: handleSubmit(handleFormSubmit), register, errors };
+  const handleInputPlate = (event: FormEvent<HTMLInputElement>) => {
+    const currentTarget = event.currentTarget;
+    let value = currentTarget.value;
+    value = value.replace(/[^a-zA-Z0-9]/g, '');
+
+    currentTarget.value = value;
+  };
+
+  const handleInputRenavam = (event: FormEvent<HTMLInputElement>) => {
+    const currentTarget = event.currentTarget;
+    let value = currentTarget.value;
+    value = value.replace(/[^0-9]/g, '');
+
+    currentTarget.value = value;
+  };
+
+  return {
+    handleSubmit: handleSubmit(handleFormSubmit),
+    register,
+    errors,
+    handleInputPlate,
+    handleInputRenavam,
+  };
 }

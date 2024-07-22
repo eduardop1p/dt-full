@@ -1,5 +1,6 @@
 'use client';
 
+import { FormEventHandler } from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import ErrorMsg from '../errorMsg';
@@ -10,9 +11,16 @@ interface Props {
   register: UseFormRegister<any>;
   errors: FieldErrors<any>;
   className?: string;
+  onInput?: FormEventHandler<HTMLInputElement>;
 }
 
-export default function Input({ label, name, register, errors }: Props) {
+export default function Input({
+  label,
+  name,
+  register,
+  errors,
+  onInput,
+}: Props) {
   const error = errors[name];
 
   return (
@@ -26,6 +34,7 @@ export default function Input({ label, name, register, errors }: Props) {
           id={name}
           {...register(name)}
           className="max-w-[152px] flex-none w-full h-[18px] rounded-sm focus:outline-1 focus:outline focus:outline-black border border-333333 border-solid text-[10px] py-[1px] px-[2px]"
+          onInput={onInput}
         />
         {error && <ErrorMsg>{error.message}</ErrorMsg>}
       </div>

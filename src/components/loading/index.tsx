@@ -131,7 +131,7 @@ export default function Loading() {
           />
         </svg>
         <span className="text-xs font-normal text-black text-center">
-          Aguarde, esse processo de pesquisa pode levar até 2 minutos.
+          Aguarde, Fazendo consulta.
         </span>
       </div>
     </div>

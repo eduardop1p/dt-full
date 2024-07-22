@@ -1,19 +1,11 @@
-import VehicleDebtsProtocol from './vehicleDebtsProtocol';
-
-export default interface VehicleProtocol extends VehicleDebtsProtocol {
+export default interface VehicleProtocol {
   amount: number;
   plate: string;
-  renavam: string;
   uf: string;
+  renavam: string;
   location?: string;
-  brandModel?: string;
-  category?: string;
-  fuel?: string;
-  body?: string;
-  lastLicensing?: string;
-  passengers?: string;
-  rangeIPVA?: string;
-  species?: string;
-  type?: string;
-  yearManufacture?: string;
+  data: {
+    title: string;
+    value: string;
+  }[];
 }
